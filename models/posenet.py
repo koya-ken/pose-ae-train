@@ -1,8 +1,8 @@
 import torch
 from torch import nn
 from models.layers import Conv, Hourglass, Pool
-from extensions.AE.AE_loss import AEloss
 from task.loss import HeatmapLoss
+from task.loss import tagLoss
 
 class Merge(nn.Module):
     def __init__(self, x_dim, y_dim):
@@ -34,7 +34,7 @@ class PoseNet(nn.Module):
         self.merge_preds = nn.ModuleList( [Merge(oup_dim, inp_dim) for i in range(nstack-1)] )
 
         self.nstack = nstack
-        self.myAEloss = AEloss()
+        self.myAEloss = tagLoss
         self.heatmapLoss = HeatmapLoss()
 
     def forward(self, imgs):

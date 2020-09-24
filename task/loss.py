@@ -56,7 +56,7 @@ def tagLoss(tags, keypoints):
     accumulate the tag loss for each image in the batch
     """
     pushes, pulls = [], []
-    keypoints = keypoints.cpu().data.numpy()
+    # keypoints = keypoints.cpu().data.numpy()
     for i in range(tags.size()[0]):
         push, pull = singleTagLoss(tags[i], keypoints[i%len(keypoints)])
         pushes.append(push)
